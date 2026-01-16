@@ -1,0 +1,97 @@
+% Latex format for A25 lectures
+%\usepackage{extsizes}
+\usepackage{amsmath}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\setcounter{part}{1}
+\usepackage[colorlinks=true,
+allcolors=blue,
+            pdfborder={0 0 0},
+            ]{hyperref}
+\def\comment{ }
+%\usepackage{ psfig}
+\usepackage[portrait]{geometry}
+
+\newcommand{\ffig}[4]{\begin{figure}\vfill
+\begin{center}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+%\hbox{\hskip 1 in\epsfxsize=#2\epsfbox{../figures/#1}\hfill}
+\hbox{\epsfxsize=#2\epsfbox{../figures/#1}}
+\caption{#3}\label{#4}
+\end{center}
+\vfill\end{figure}}
+\newcommand{\ignore}[1]{}
+
+\newcommand{\pffig}[4]{\begin{figure}[h]%\vfill
+\begin{centering}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+\includegraphics[width=#2]{#1}
+% \hbox{\hskip 1 in\epsfxsize=#2\epsfbox{#1}\hfill}
+\caption{#3}\label{#4}
+\end{centering}
+\vfill\end{figure}}
+
+\newcommand{\bffig}[4]{\begin{figure}[hb]\vfill
+\begin{centering}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+\includegraphics[width=#2]{#1}
+% \hbox{\hskip 1 in\epsfxsize=#2\epsfbox{#1}\hfill}
+\caption{#3}\label{#4}
+\end{centering}
+\vfill\end{figure}}
+
+\newcommand{\nffig}[4]{\begin{figure}\vfill
+\begin{centering}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+\includegraphics[width=#2]{../figures/#1}
+% \hbox{\hskip 1 in\epsfxsize=#2\epsfbox{#1}\hfill}
+\caption{#3}\label{#4}
+\end{centering}
+\vfill\end{figure}}
+
+
+\newcommand{\botffig}[4]{\begin{figure}[b]\vfill
+\begin{centering}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+\includegraphics[width=#2]{../figures/#1}
+% \hbox{\hskip 1 in\epsfxsize=#2\epsfbox{#1}\hfill}
+\caption{#3}\label{#4}
+\end{centering}
+\vfill\end{figure}}
+
+\newcommand{\tffig}[5]{\begin{figure}[h]\vfill\begin{center}
+%\newcommand{\unitz}{\bm{\hat{z}}}
+\includegraphics[width=#3]{../figures/#1}
+\includegraphics[width=#3]{../figures/#2}
+% \hbox{\hskip 1 in\epsfxsize=#2\epsfbox{#1}\hfill}
+\caption{#4}\label{#5}
+\end{center}\vfill\end{figure}}
+
+
+
+\renewcommand{\thepage}{Physics 631 -- Lecture \arabic{part}-\arabic{page}}  
+\renewcommand{\thepart}{\arabic{part}}
+
+\textwidth 7 in
+\oddsidemargin -.25 in
+\parindent 0 pt
+\parskip 3 pt
+\baselineskip 16 pt
+\headheight 0 pt
+\footskip 20 pt
+
+\headsep 0 pt
+\setlength{\textheight}{40\baselineskip}
+
+%\newcommand{\ffig}[4]{\begin{figure}\vfill\begin{center}
+%\hbox{\hskip 1 in\epsfxsize=4 in\epsfbox{#1}\hfill}
+%\caption{#3}\label{#4}
+%\end{center}\vfill\end{figure}}
+
+\renewcommand{\thepage}{Physics 631 --   \arabic{part}-\arabic{page}}  
+\renewcommand{\thepart}{\arabic{part}}
+
+
+%\input a25_machine_dep
+\input epsf

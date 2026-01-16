@@ -1,0 +1,110 @@
+%!TEX TS-program = latex
+%\documentclass[12pt]{article}
+%%% Define flags for accessibility
+\newif\ifaccess  % test accessibility, if not true, accessibility tools like tagpdf are not enabled. 
+\newif\ifuatwo   % enable PDF 2.0/UA-2 - alternative is PDF 1.7/UA-1 
+\newif\iflargeprint
+
+%%% Set flags for different accessibility levels
+ 
+\accesstrue
+\uatwofalse  % This toggles between PDF 1.7 and PDF 2.0
+\largeprintfalse % This toggles largeprint options
+
+\input accpreamble.tex
+
+\iflargeprint
+\documentclass[17pt]{extreport}
+\else
+\documentclass[12pt]{extreport}
+\fi
+
+
+\input PH631_layout2
+
+\setcounter{part}{10}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\input PH631_logo
+\input extra_macros
+
+%\input extra_macros
+
+\bigskip
+
+\section{Laplace equation in cylindrical coordinates}
+
+You are likely familiar with the spherical solutions above from Quantum Mechanics as they are the solutions for the hydrogen atom.  So let's do cylindrical coordinates as scientific apparatus is more likely to have cylindrical symmetry. 
+
+The Laplace equation in cylindrical coordinates $(\rho,\phi,z)$  is:
+
+\begin{eqnarray}
+\Del^2 \Phi (\rho,\phi,z) = 0 &=& \pderivii{\Phi}{\rho} + \oneover{\rho}\pderiv{\Phi}{\rho} + \oneover{\rho^2} \pderivii{\Phi}{\phi} + \pderivii{\Phi}{z}\\
+\end{eqnarray}
+
+Let's try $$\Phi(\rho,\phi,z) = R(\rho) Q(\phi) Z(z) $$
+
+\begin{eqnarray}
+%0 &=& R''(\rho)Q(\phi) Z(z)  + \oneover{\rho} R'(\rho)Q(\phi) Z(z) + \oneover{\rho^2}Q''(\phi)R(\rho)Z(z) + Z''(z) R(\rho)Q(\phi)\\
+0 &=& R''(\rho)Q(\phi) Z(z)  + \oneover{\rho} R'(\rho)Q(\phi) Z(z) + \oneover{\rho^2}Q''(\phi)R(\rho)Z(z) + Z''(z) R(\rho)Q(\phi)\\
+0 &=& \frac{R''(\rho) + \oneover{\rho} R'(\rho)}{R(\rho)} + \oneover{\rho^2}\frac{Q''(\phi)}{Q(\phi)} + \frac{Z''(z)}{Z(z)}\\
+\end{eqnarray}
+
+
+
+The last 2 look pretty standard, they will become either exponentials or trigonometric functions as we saw in spherical/rectangular coordinates. 
+
+\begin{eqnarray}
+\sderiv{Z}{z} -  k^2 Z &=& 0\\
+Z(z) &=& e^{\pm kz} \\
+\sderiv{Q}{\phi} + \nu^2 Q &=&0\\
+Q(\phi) &=& e^{\pm i\nu\phi}
+\end{eqnarray}
+
+Plug into the full equation and we get:
+
+\begin{eqnarray}
+0 &=& R''(\rho) + \oneover{\rho} R'(\rho) + \biggl( k^2 - \frac{\nu^2}{\rho^2}\biggr)R(\rho) \\ \label{evil}
+0 &=& R''(x) + \oneover{x} R'(x) + \biggl(1-\frac{\nu^2}{x^2}\biggr) R(x) \\
+\end{eqnarray}
+
+\hbox{\ where $x=k\rho$}
+
+For this setup, $\nu$ needs to be an integer for $Q(\phi)$ to be single valued at $2 \pi$. 
+
+The solutions to \ref{evil} are proof that there is a hell. The solutions are the Bessel Functions which do not have zeros in convenient places like $\cos n\theta/2\pi$ does. 
+
+\begin{eqnarray}
+J_\nu(x) &=& \biggl(\frac{x}{2}\biggr)^\nu \sum_{j=0}^{\infty} \frac{(-1)^j}{j ! \  (j + \nu)!}  \biggl(\frac{x}{2}\biggr)^j\\
+J_{-\nu}(x) &=& \biggl(\frac{x}{2}\biggr)^{-\nu} \sum_{j=0}^{\infty} \frac{(-1)^j}{j ! \ (j - \nu)!}  \biggl(\frac{x}{2}\biggr)^j
+\end{eqnarray}
+
+For the simplest case of a conducting tube with azimuthal symmetry, $V=0$ at $\rho=a$;  $\nu=0$ and the set of radial functions is:
+
+\begin{eqnarray}
+R(\rho;n)&=&\sqrt \rho J_0( x_{0n}\frac{\rho}{a})\\
+x_{0n} &=& 2,405, 5.520, 8.654, \quad ... \quad, n\pi  + (\nu - \onehalf) \frac{\pi}{2}, \quad ... \quad
+\end{eqnarray}
+
+As the $x_{\nu n}$ are zeros of $J_{\nu}$,  $R(a) = \sqrt a J_\nu(x_{\nu n})=0$ as it should be. 
+
+Since $R(x) = R(k \rho)$, where $k$ was the argument of $Z(z)$ we have to have $k_{mn}= x_{mn}/a$ and
+$Z(z) $ looks like $\sinh({x_{0n}z/a})$ for $J_{0} $ zeros  $n=1,2,3,...$.
+
+But wait, there's more, to get a complete set when $\nu$ is an integer (which it is),  one has to use the Bessel Function of the Second Kind.
+
+\begin{eqnarray}
+N_{\nu}(x) &=& \frac{J_\nu(x) \cos \nu \pi - J_{-\nu}(x) }{\sin \nu \pi}\\
+N_{n}(x) &=& \lim_{\nu\gt n} \frac{J_\nu(x) \cos \nu \pi - J_{-\nu}(x) }{\sin \nu \pi}
+\end{eqnarray}
+
+Which does not appear to be well behaved as $\nu\gt $ any integer. However, we are assured that $J_\nu(x)$ and $N_{\nu}(x)$ form a complete set of orthogonal functions. 
+
+At this point even Jackson throws up his hands and refers us to our handy 1050 page books of ``special functions that JDJ might wish to use on any particular day".\footnote{We once had a team of six Berkeley grad students digging through books of special functions to find the one we needed for a  quantum problem set.
+Fortunately my father had given me Abramowitz and Stegun (1046 pages) for Christmas. Others searched Gradshteyn and  Ryzhik (1060 in translation from Russian).}
+
+
+
+\end{document}
