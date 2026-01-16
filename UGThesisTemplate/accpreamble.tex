@@ -1,0 +1,49 @@
+% You need this file first
+%
+% these are flags added to check accessibility 
+
+
+
+% this section loads tagpdf with different options
+ 
+\ifaccess
+    \ifuatwo
+        \typeout{USING PDF 2.0/ua-2}
+        \DocumentMetadata{
+            uncompress,
+            lang=en-US,
+            pdfversion=2.0,
+            pdfstandard=a-4f,
+            pdfstandard=ua-2,
+            tagging=on,
+            tagging-setup={math/setup={mathml-SE,mathml-AF}}
+            }
+            \tagpdfsetup {math/mathml/luamml/load=true}
+          \else
+          \typeout{USING PDF 1.7/UA-1}
+          \DocumentMetadata{
+            uncompress,
+            lang=en-US,
+            pdfversion=1.7,
+            pdfstandard=ua-1,
+            tagging=on,
+            }
+            \tagpdfsetup {math/mathml/luamml/load=true}
+          \fi
+    \else
+    \typeout{NOT USING TAGPDF}
+\fi
+
+\listfiles
+
+
+%%% Now you can start on normal latex 
+
+% \iflargeprint
+%\documentclass[onehalf,12pt]{newbeavtex}
+% \else
+%\documentclass[onehalf,11pt]{beavtex}
+% \fi
+
+% remind self you did this
+%\def\preambleloaded{Precompiled preamble loaded. Ready to go!}

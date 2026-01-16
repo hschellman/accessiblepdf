@@ -1,0 +1,290 @@
+
+% You need to run this with LuaLaTex
+
+%%% Define flags for accessibility
+\newif\ifaccess  % test accessibility, if not true, accessibility tools like tagpdf are not enabled. 
+\newif\ifuatwo   % enable PDF 2.0/UA-2 - alternative is PDF 1.7/UA-1 
+\newif\iflargeprint
+
+%%% Set flags for different accessibility levels
+ 
+\accesstrue
+\uatwofalse  % This toggles between PDF 1.7 and PDF 2.0
+\largeprinttrue % This toggles largeprint options
+
+\input{accpreamble.tex}  
+
+\iflargeprint
+\documentclass[17pt]{extreport}
+\else
+\documentclass[12pt]{extreport}
+\fi
+
+% you need to tell the program about title, author, etc before you start actually compiling the document. 
+
+\newcommand{\thetitle}{A Variational Study of Felis catus: Adventures in Measurement}
+\newcommand{\theauthor}{Bernice Beaver}
+
+\title{\thetitle}
+\author{\theauthor}
+
+% Basic packages you need for figures, links and a bibliography
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url} % make links if you need them
+\usepackage[margin=1truein]{geometry}
+\usepackage{setspace}
+\usepackage[nottoc,numbib]{tocbibind}
+
+% PDF/UA use the hyperef package to make links between sections but make links more subtle for readbility
+% explicit boxes around links or pale colors are distracting but...
+% For checking links it is good to see them all, this makes them dark blue 
+\usepackage[colorlinks=true, allcolors={[rgb]{0,0.0,0.5}}]{hyperref}
+
+% PDF/UA you need to provide metadata for your files. This actually runs once you start the document. 
+\makeatletter
+\AtBeginDocument{
+    \hypersetup{
+        pdflang={en-US},
+        pdftitle={\@title},
+        pdfdisplaydoctitle=true,
+        pdfauthor={\@author},
+        pdfsubject={\@title},
+        pdfkeywords={Kittens, Accessibility, Chat-GPT, LaTeX}
+    }
+}
+\makeatother
+
+% PDF/UA - put any macros for symbols in a separate file and give them human readable names. 
+\input macros  
+
+% PDF/UA this helps create accessible headers for tables.  Here I say there is one header row but you can (inline) change to different rows like header-rows={1,2,3}
+\tagpdfsetup{table/header-rows={1}}
+
+
+%%%%%%%%%%%%%%%% Start of the actual document %%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\thispagestyle{empty} 
+   \begin{center}
+       \vspace*{1cm}
+
+       \textbf{\thetitle}
+
+      % \vspace{0.5cm}
+      %  Adventures in Measurement
+            
+       \vspace{1.5cm}
+
+       \textbf{\theauthor}
+
+       \vfill
+            
+       A thesis presented for the degree of\\
+       Bachelor of Science 
+            
+       \vspace{0.8cm}
+       % PDF/UA add alternate text
+       \includegraphics[alt={OSU logo with beaver facing right},width=0.2\textwidth]{OSU_vertical_2C_O_over_W-eps-converted-to.pdf}
+            
+       Department of Physics\\
+       College of Science\\
+       Oregon State University\\
+        \today
+            
+   \end{center}
+-\end{titlepage}
+ \doublespacing
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abstract and Table of Contents %%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+\begin{abstract}
+\input{abstract.tex}
+
+\end{abstract}
+
+\newpage
+
+
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% main text %%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{page}{1}
+\chapter{Introductory Material} \label{sec:intro}  % so I can refer to it later
+\pagenumbering{arabic}
+\section{Introduction}
+
+This is why this topic is interesting.
+
+\section{Background}
+
+This is what other people have done.  Let me list a few things.
+
+\begin{itemize} % make a list
+\item I read this paper \cite{DUNE:2020cqd}.
+\item I plan to read four more.
+\end{itemize}
+
+This is what my research group had already done before I started. 
+
+\newpage
+
+\chapter{Methodology} \label{sec:Methods}
+
+This is how I did it.
+
+\begin{enumerate}
+    
+\item First I wondered how big kittens were.  I want to knit them a sweater.
+    
+\item Then I set assembled the things I needed to measure kittens.
+
+\begin{enumerate} % make a numbered list
+\item I acquired several useful objects.
+%\begin{enumerate}
+\item I obtained a ruler from \href{http://janinesgadgets.com/catalog/widget}{Janine's House of Gadgets} \cite{sample1}.
+\item I also borrowed my housemate's kitten  Floyd ({\it Felis cattus}).
+\end{enumerate}
+
+
+\item  Then I used the ruler to measure Floyd over several days.
+
+\item I also asked CHAT-GPT.
+
+\end{enumerate}
+\newpage
+
+\chapter{Results and Discussion} \label{sec:results}
+
+\section{Results}
+
+\subsection{A random result to illustrate illustrations}
+In Fig. \ref{fig:nice} I show some results from Ref. \cite{E665:1997qph}. I should always reference figures someplace in the text.  
+
+\begin{figure}[ht]
+\begin{center}
+% PDF/UA  add alternate text
+\includegraphics[alt={Plot of the muon-proton scattering cross section versus momentum transfer squared.  The E665 data are shown as solid circles while the data from other experiments are shown as open symbols},width=0.50\linewidth]{rho.png}
+\caption[Figure from Adams \etal]{This is a figure that makes my data look good taken from \cite{E665:1997qph}. The solid circles are the important ones.}
+\label{fig:nice}
+\end{center}
+\end{figure}
+\subsection{Kitten size measurements}
+
+I measured Floyd's length from nose to tail-tip four times between August 3 and 5, 2023.  See Table \ref{tab:kitten} for individual measurements.
+
+
+
+
+
+
+
+\begin{table}[ht]
+    \begin{centering}
+    \begin{tabular}{c c l}
+    
+    %\hline
+   
+    \bf
+    Time&\qquad \bf Length (cm)\qquad & \bf comment\\
+    \hline
+    \rm
+    August 3, 12:00& 29&asleep\\
+    August 4, 08:00& 25 &won't stay still\\
+    August 5, 16:00& 32 &stretching\\
+    August 5, 02:00& 30 &asleep\\
+    %\hline
+    \end{tabular}
+    
+    \caption[Kitten length measurements]{Measurements of the length of Floyd the kitten from August 3 to August 5, 2023.}
+    \label{tab:kitten}
+    \end{centering}
+\end{table}
+
+\subsection{Asking AI}
+
+I asked Chat-GPT 3.5 about the sizes of kittens\cite{AI}, for a full transcript, see Appendix \ref{sec:appendixI}.  Its response was not very useful as it gave no real numbers. For example it provided minimal information about newborns: ``Newborn: Kittens are usually born blind and deaf, and they are entirely dependent on their mother. They are tiny, typically fitting in the palm of your hand.''  but no further size information on older kittens. 
+ 
+
+\section{Analysis}
+
+A formula for the average length, $L$, of a cat is
+
+\begin{eqnarray}
+L &=& \frac{\displaystyle{\sum_{i=1}^{N} \ellsubi}}{N}
+\end{eqnarray}\label{lengtheq}
+
+where there are $N$ measurements, $\ell_i$\footnote{I used {\tt displaystyle} for equation \ref{lengtheq} as LaTeX wanted to mess with the placement of $i=1$ and $N$.}\footnote{Also, I was careful to define all the terms in the equation.}.
+
+
+  Floyd was measured to be, on average, 30 cm. long.  However, there were significant variations in the measurements depending on his level of activity. His measured length ranged from 25-32 cm.
+
+
+
+\newpage
+
+\chapter{Conclusions} \label{sec:conclusions}
+In Sec. \ref{sec:results} I showed a nice picture, Fig. \ref{fig:nice}.
+
+I was unable to obtain precise data on kitten length.  To obtain definitive results would require more kittens. CHAT-GPT\cite{AI} was not able to provide better information than a ruler. 
+
+\newpage
+
+\chapter{Acknowledgments} \label{sec:acknow}
+
+\input{acknowledgements}
+
+%\newpage
+\renewcommand{\bibname}{References}  % change the name from Bibliography to References
+\bibliographystyle{ieeetr}% this style puts paper titles in quotes which is nice. 
+\bibliography{bibliography}
+
+\newpage
+
+\appendix
+%\chapter{Appendix} \label{sec:appendixI}
+\chapter{AI documentation }\label{sec:appendixI}
+
+I used CHAT-GPT 3.5 because I am too cheap to pay \$20/month for 4.0. Here is the response \cite{AI}.
+
+\section{Response}
+
+Prompt:  "size of kitten"
+
+''The size of a kitten can vary depending on its age, breed, and individual genetics. Typically, newborn kittens are very small, weighing only a few ounces (around 85 grams) and measuring a few inches in length. As they grow, their size will increase rapidly.
+
+Here's a rough guideline for the size of kittens at different stages of development:
+
+1. Newborn: Kittens are usually born blind and deaf, and they are entirely dependent on their mother. They are tiny, typically fitting in the palm of your hand.
+
+2. 2-4 weeks old: During this stage, kittens start to open their eyes and ears, and they begin to explore their surroundings. They still remain quite small, but you'll notice some growth compared to the newborn stage.
+
+3. 4-8 weeks old: By this point, kittens are becoming more active and playful. Their size has increased, and they are developing their coordination and social skills.
+
+4. 8-12 weeks old: Kittens continue to grow rapidly during this period. They are more independent and may be weaned from their mother's milk onto solid food. Their size can vary widely depending on their breed.
+
+5. 12 weeks and older: Once kittens reach 12 weeks of age, they are often considered juveniles or young cats. Their size will vary greatly depending on their breed, with some breeds being larger than others.
+
+Keep in mind that the size of a kitten's parents and their specific breed will also influence how big they eventually grow. Additionally, a kitten's overall health and nutrition play a significant role in their growth and development. If you have concerns about the size or growth of a kitten, it's a good idea to consult with a veterinarian to ensure they are healthy and thriving."
+
+\section{More gnarly equation as a test}
+
+\begin{align}
+f(x) &= \abs{x} +
+\begin{cases}
+1 & \text{if $x<0$} \\
+0 & \text{if $x=0$} \\
+-1 & \text{if $x>0$}
+\end{cases}\label{A} \\
+%
+f(x) &> -1 \quad \text{see \eqref{A}}
+\end{align}
+
+\end{document}
